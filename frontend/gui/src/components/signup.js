@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Button } from 'antd';
 import axios from 'axios';
+import { withRouter } from "react-router-dom";
 
 class Signup extends React.Component {
   constructor() {
@@ -32,17 +33,25 @@ class Signup extends React.Component {
      });
   };
  handle_submit(event){
-    axios.post('http://127.0.0.1:8000/rest-auth/signup/', {
-      username:this.state.username,
-      password1:this.state.password1,
-      password2:this.state.password2,
-      email:this.state.email
-    })
-    .then(res=> { const token = res.data.key})
-      .catch(err => {console.log(err)})
-      // event.preventDefault();
-console.log("submit")
-}
+  const {password1, password2} = this.state;
+    if(password1===password2){
+    
+      axios.post('http://127.0.0.1:8000/rest-auth/signup/', {
+        username:this.state.username,
+        password1:this.state.password1,
+        password2:this.state.password2,
+        email:this.state.email
+      })
+      .then(res=> { const token = res.data.key})
+        .catch(err => {console.log(err)})
+        // window.forceUpdate();
+        // event.preventDefault();  
+    }
+    else{
+      console.log("pass donot match")
+    }
+    this.props.history.push("/login");
+  }   
 
   render() {
     
@@ -97,4 +106,4 @@ console.log("submit")
   }
 }
 
-export default Signup
+export default withRouter(Signup);

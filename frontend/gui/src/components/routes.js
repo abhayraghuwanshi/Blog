@@ -8,8 +8,7 @@ import Personal from './personal';
 
 const BaseRouter=()=>(
 <div>
-<Route exact  path='/login' component={LoginForm}/>
-
+    <Route exact  path='/login' component={LoginForm}/> 
     <Route exact  path='/Signup/' component={Signup}/>
     <Route exact path='/' component={ListComponent}/>
     <Route exact  path='/personal' component={Personal}/>

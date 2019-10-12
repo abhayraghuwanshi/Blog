@@ -20,7 +20,7 @@ class LoginForm extends React.Component {
       return newState;
     });
   };
-    componentDidMount(){
+    handle_login = ()=>{
       axios.post('http://127.0.0.1:8000/rest-auth/login/', {
         username:this.state.username,
         password:this.state.password
@@ -31,11 +31,12 @@ class LoginForm extends React.Component {
           localStorage.setItem('token', token)
         })
         .catch(err => {console.log(err)})
+        console.log("login run")
     }
 
   render() {
     return (
-      <Form   className="login-form">
+      <Form className="login-form" onSubmit={this.handle_login}>
         <Form.Item label="username">
             <Input
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
