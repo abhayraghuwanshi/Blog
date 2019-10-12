@@ -36,7 +36,7 @@ class ListComponent extends React.Component {
                 return(
                  <div>
  
-                  <List
+             <List
                   itemLayout="vertical"
                   size="large"
                   pagination={{
@@ -54,10 +54,7 @@ class ListComponent extends React.Component {
                         <IconText type="star-o" text="0" key="list-vertical-star-o" />,
                         <IconText type="like-o" text="0" key="list-vertical-like-o" />,
                         <IconText type="message" text="0" key="list-vertical-message" />,
-                      ]}
-                
-                    
-                    >
+                      ]}   >
                       <List.Item.Meta
                         avatar={<Avatar src={item.avatar} />}
                         title={<a href={`/${item.id}/`}>{item.title}</a>}

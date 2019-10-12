@@ -40,8 +40,16 @@ INSTALLED_APPS = [
     'article',
     'rest_framework',
     'corsheaders',
-    'rest_framework.authtoken'
-]
+    'rest_framework.authtoken',
+    'authentication',
+    'rest_auth',
+     'django.contrib.sites',
+    'allauth',
+    'allauth.account'
+
+] 
+SITE_ID = 1 
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -132,7 +140,6 @@ REST_FRAMEWORK = {
                 'rest_framework.permissions.IsAuthenticated',
      ),
      'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
      )
@@ -141,9 +148,6 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_ALLOW_ALL = True
 
 
-JWT_AUTH = {
-    'JWT_RESPONSE_PAYLOAD_HANDLER': 'djreact.utils.my_jwt_response_handler'
-}
 
 
 CORS_ALLOW_METHODS = [

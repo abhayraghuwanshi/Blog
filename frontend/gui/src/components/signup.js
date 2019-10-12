@@ -1,73 +1,65 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Form, Input, Button } from 'antd';
+import axios from 'axios';
 
 class Signup extends React.Component {
   constructor() {
     super();
     this.state = {
-      formLayout: 'horizontal',
+     
       username:'',
-      password:'',
+      password1:'',
+      password2:'',
       email:''
     };
-    this.handle_signup=this.handle_signup.bind(this);
+   this.handle_submit=this.handle_submit.bind(this);
   }
-  handle_signup = (e, data) => {
-    e.preventDefault();
-    fetch('http://localhost:8000/auth/users/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-   
-      .then(res => res.json())
-      .then(json => console.log(json))
-      .then(json => {
-        localStorage.setItem('token',json.token);
-        this.setState({
-          username: json.username
-        });
-      });
-  };
-
 
   handle_change = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    this.setState(prevstate => {
-      const newState = { ...prevstate };
-      newState[name] = value;
-      return newState;
-    });
-  };
- 
+    const {password, confirmPassword} = this.state;
 
+    // if(password.value!== confirmPassword.value){
+    //   alert("password donot match")
+    // }
+    
+       const name = e.target.name;
+       const value = e.target.value;
+       this.setState(prevstate => {
+         const newState = { ...prevstate };
+         newState[name] = value;
+       return newState;
+     });
+  };
+ handle_submit(event){
+    axios.post('http://127.0.0.1:8000/rest-auth/signup/', {
+      username:this.state.username,
+      password1:this.state.password1,
+      password2:this.state.password2,
+      email:this.state.email
+    })
+    .then(res=> { const token = res.data.key})
+      .catch(err => {console.log(err)})
+      // event.preventDefault();
+console.log("submit")
+}
 
   render() {
-    const { formLayout } = this.state;
-    const formItemLayout =
-      formLayout === 'horizontal'
-        ? {
+    
+  
+    const formItemLayout = {
             labelCol: { span: 4 },
             wrapperCol: { span: 14 },
           }
-        : null;
-    const buttonItemLayout =
-      formLayout === 'horizontal'
-        ? {
+      
+    const buttonItemLayout = {
             wrapperCol: { span: 14, offset: 4 },
           }
-        : null;
 
 
     return (
       <div>
-        <Form layout={formLayout} onSubmit={this.handle_signup}>
-          
+        <Form layout={formItemLayout} onSubmit={this.handle_submit} >
           <Form.Item label="username" {...formItemLayout}>
             <Input placeholder="input username"
              name="username"
@@ -82,18 +74,18 @@ class Signup extends React.Component {
           </Form.Item>
           <Form.Item label="password" {...formItemLayout}>
             <Input placeholder="input password" 
-                   name="password" 
+                   name="password1" 
                     type="password"
-                    value={this.state.password}
+                    value={this.state.password1}
                     onChange={this.handle_change}/>
           </Form.Item>
-          {/* <Form.Item label="Re-enter password" {...formItemLayout}> 
-            <Input placeholder="input password"
+           <Form.Item label="confirm-password" {...formItemLayout}> 
+            <Input placeholder="re-enter password"
                name="password2" 
                type="password"
                value={this.state.password2}
                onChange={this.handle_change}/>
-          </Form.Item>*/}
+          </Form.Item>  
 
           <Form.Item {...buttonItemLayout}>
             <Button type="primary" htmlType="submit">Sign up</Button>
@@ -106,4 +98,3 @@ class Signup extends React.Component {
 }
 
 export default Signup
-

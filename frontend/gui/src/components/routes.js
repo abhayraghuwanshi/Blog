@@ -13,7 +13,7 @@ const BaseRouter=()=>(
     <Route exact  path='/Signup/' component={Signup}/>
     <Route exact path='/' component={ListComponent}/>
     <Route exact  path='/personal' component={Personal}/>
-     <Route exact path='/:articleID/' component={DetailComponent}/> 
+     {/* <Route exact path='/:articleID/' component={DetailComponent}/>  */}
     
 </div>
 )
