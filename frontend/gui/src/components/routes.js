@@ -5,6 +5,7 @@ import DetailComponent from './detailcomponent'
 import LoginForm from './login_form';
 import Signup from './signup';
 import Personal from './personal';
+import SignupSuccess from './signup-success';
 
 const BaseRouter=()=>(
 <div>
@@ -13,6 +14,7 @@ const BaseRouter=()=>(
     <Route exact path='/' component={ListComponent}/>
     <Route exact  path='/personal' component={Personal}/>
      {/* <Route exact path='/:articleID/' component={DetailComponent}/>  */}
+     <Route exact  path='/signup-success/' component={SignupSuccess}/>
     
 </div>
 )

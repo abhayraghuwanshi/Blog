@@ -4,7 +4,6 @@ import axios from 'axios'
 
 
 class UserForm extends React.Component{
-  
 
     onHandleFormSubmit=(event,typeofmethod,articleID)=>{
         const title= event.target.elements.title.value;
@@ -37,16 +36,16 @@ class UserForm extends React.Component{
     render(){
         return(
 
-            <Form   onSubmit={(event)=>this.onHandleFormSubmit(
+            <Form onSubmit={(event)=>this.onHandleFormSubmit(
                 event,
                 this.props.typeofmethod,
                 this.props.articleID
             )}>
-            <Form.Item  label="title" >
+            <Form.Item  label="Title" >
                 <Input name="title" placeholder="enter title" />
             </Form.Item>
-            <Form.Item   label="content" >
-                <Input name="content" placeholder="enter content" />
+            <Form.Item   label="Content" >
+                <textarea name="content" style={{width:"100%",height:'200px' ,lineHeight:'20px'}} placeholder="enter content" />
             </Form.Item>
             <Form.Item >
                 <Button type="primary" htmlType="submit">{this.props.buttontext}</Button>

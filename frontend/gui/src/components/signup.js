@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button ,Alert} from 'antd';
 import axios from 'axios';
 import { withRouter } from "react-router-dom";
+
+
+
+
 
 class Signup extends React.Component {
   constructor() {
@@ -32,6 +36,11 @@ class Signup extends React.Component {
        return newState;
      });
   };
+
+  onClose = e => {
+    console.log(e, 'I was closed.');
+  };  
+
  handle_submit(event){
   const {password1, password2} = this.state;
     if(password1===password2){
@@ -48,10 +57,18 @@ class Signup extends React.Component {
         // event.preventDefault();  
     }
     else{
-      console.log("pass donot match")
+    //   <Alert
+    //   message="Error Text"
+    //   description="password donot match"
+    //   type="error"
+    //   closable
+    //   onClose={this.onClose()}
+    // />
     }
-    this.props.history.push("/login");
+    this.props.history.push("/signup-success");
   }   
+
+
 
   render() {
     
