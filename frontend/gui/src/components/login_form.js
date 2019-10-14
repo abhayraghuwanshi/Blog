@@ -52,6 +52,7 @@ class LoginForm extends React.Component {
               prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
               type="password"
               name="password"
+              placeholder="password"
               value={this.state.password}
               onChange={this.handle_change}
             />

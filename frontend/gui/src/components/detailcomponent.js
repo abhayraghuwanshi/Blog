@@ -2,7 +2,7 @@ import React from 'react'
 import { Card ,Button} from 'antd'
 import axios from 'axios'
 import UserForm from './form';
-
+import accountSetting from './accountSetting'
 
 class DetailComponent extends React.Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class DetailComponent extends React.Component {
     render() {
     return(
         <div>
-            
+            <accountSetting/>
             <Card title={this.state.article.title} >
                 <p>{this.state.article.content}</p>
             </Card><br/>
