@@ -4,27 +4,39 @@ import axios from 'axios'
 
 
 class UserForm extends React.Component{
+    
+    state={
+        selectedFile:null
+    }
+
+    fileSelectorHandler= event => {
+        this.setState({
+            selectedFile:event.target.files[0] 
+        })
+    }
 
     onHandleFormSubmit=(event,typeofmethod,articleID)=>{
+       
         const title= event.target.elements.title.value;
         const content= event.target.elements.content.value; 
         console.log(title,content); 
-
-
+        // const fd = new FormData();
+        // fd.append('image', this.state.selectedFile,this.state.selectedFile.name)
         switch(typeofmethod) {
             case 'put':
               return  axios.put(`http://127.0.0.1:8000/api/${this.props.articleID}/`,{
                     content:content,
-                    title:title 
+                    title:title
                 })
-                .then(res=>
+                .then(res=> 
                     console.log(res))
                 .catch(err=>console.log(err));
                         
             case 'post':
              return  axios.post('http://127.0.0.1:8000/api/',{
                     content:content,
-                    title:title 
+                    title:title,
+                    image:this.state.selectedFile
                 })
                 .then(res=>
                     console.log(res))
@@ -46,6 +58,9 @@ class UserForm extends React.Component{
             </Form.Item>
             <Form.Item   label="Content" >
                 <textarea name="content" style={{width:"100%",height:'200px' ,lineHeight:'20px'}} placeholder="enter content" />
+            </Form.Item>
+            <Form.Item  label="image" >
+                <input type="file" name="image" onChange={this.fileSelectorHandler}/>
             </Form.Item>
             <Form.Item >
                 <Button type="primary" htmlType="submit">{this.props.buttontext}</Button>
