@@ -49,11 +49,20 @@ class ListComponent extends React.Component {
                         <IconText type="star-o" text="0" key="list-vertical-star-o" />,
                         <IconText type="like-o" text="0" key="list-vertical-like-o" />,
                         <IconText type="message" text="0" key="list-vertical-message" />,
-                      ]}  >
+                      ]}  
+
+                      extra={
+                        <img
+                          width={272}
+                          alt="logo"
+                          src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.pn"/>
+                          }
+                        >
                       <List.Item.Meta
                         avatar={<Avatar src={item.avatar} />}
                         title={<a href={`/${item.id}/`}>{item.title}</a>}
                         description={item.description}/>
+
                       {item.content}
                     </List.Item>
                      )}/>

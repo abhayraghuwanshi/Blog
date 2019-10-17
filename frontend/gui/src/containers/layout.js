@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Layout, Menu,Breadcrumb ,Icon} from 'antd';
+import { Layout, Menu,Breadcrumb ,Icon, Dropdown} from 'antd';
 const { Header, Content  } = Layout;
 // import LoginForm from '../components/login_form'
 
@@ -46,7 +46,19 @@ class CustomLayout extends React.Component {
                 }
 
         render() {
-            
+            const menu = (
+                <Menu>
+                  <Menu.Item key="0">
+                   <Link to="/Profile/">Profile</Link>
+                  </Menu.Item>
+                  <Menu.Item key="1">
+                    <Link to="/blogs/">Blogs</Link>     
+                  </Menu.Item>
+                  <Menu.Item key="2">
+                      <Link to="/changePassword/">Change Password</Link>
+                    </Menu.Item>
+                </Menu>
+              );
      
         return(
             <Layout className="layout">
@@ -55,7 +67,13 @@ class CustomLayout extends React.Component {
                 <Menu  theme="dark"  mode="horizontal"  style={{ lineHeight: '64px' }}>      
                    <Menu.Item key="1"><Link  to="/">Home</Link></Menu.Item> 
                    <Menu.Item key="2"><Link to='/personal'>Personal</Link></Menu.Item>
-                    <Menu.Item style={{float:'right'}} ><Link to="/accountSetting/">Account <Icon type="down" /></Link></Menu.Item>
+                    <Menu.Item style={{float:'right'}} >
+                        <Dropdown overlay={menu} trigger={['click']}>
+                                <a className="ant-dropdown-link" href="#">
+                                Account<Icon type="down" />
+                                </a>
+                            </Dropdown>
+                     </Menu.Item>
                            
                {/* {
                    if(this.state.logged_in)

@@ -2,16 +2,21 @@ import React from 'react'
 import { Form, Icon, Input, Button } from 'antd';
 import PropTypes from 'prop-types';
 import axios from 'axios'
-class LoginForm extends React.Component {
 
-  state = {
+
+class LoginForm extends React.Component {
+  constructor() {
+    super();
+    this.state = {
     username: '',
-    password: '',
-    logged_in:false
+    password: ''
+    }
+    this.handleSubmit();
+  
   };
 
 
-  handle_change = e => {
+  handle_change=(e)=>{
     const name = e.target.name;
     const value = e.target.value;
     this.setState(prevstate => {
@@ -19,24 +24,36 @@ class LoginForm extends React.Component {
       newState[name] = value;
       return newState;
     });
+  
   };
-    handle_login = ()=>{
-      axios.post('http://127.0.0.1:8000/rest-auth/login/', {
-        username:this.state.username,
-        password:this.state.password
-      })
-      .then(res=>
-        {
-          const token = res.data.key;
-          localStorage.setItem('token', token)
-        })
-        .catch(err => {console.log(err)})
-        console.log("login run")
+
+  handleSubmit=(e)=>{
+   // e.preventDeafult();
+    console.log("handle login "+ this.state.username);
+    axios.post('http://127.0.0.1:8000/rest-auth/login/', {
+      username:this.state.username,
+      password:this.state.password
     }
+    )
+     .then((res) =>{
+       if(res.data.code == 400){
+          console.log("error");
+       }
+      })}
+       
+        
+      //    const token = this.res.key;
+      //  localStorage.setItem('token', token);
+      //  })
+      // .catch(err => {console.log(err)})
+      
+      
+  
 
   render() {
+    localStorage.setItem('abhay',18121002);
     return (
-      <Form className="login-form" onSubmit={this.handle_login}>
+       <Form className="login-form" onSubmit={this.handleSubmit} >
         <Form.Item label="username">
             <Input
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -58,7 +75,7 @@ class LoginForm extends React.Component {
             />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button">
+          <Button type="submit" htmlType="submit" onClick={this.handleSubmit} className="login-form-button">
             Log in
           </Button><br/>
           Or <a href="/Signup">register now!</a>
@@ -72,6 +89,6 @@ class LoginForm extends React.Component {
 
 export default LoginForm;
 
-LoginForm.propTypes = {
-  handle_login: PropTypes.func.isRequired
-};
+// LoginForm.propTypes = {
+//   handle_login: PropTypes.func.isRequired
+// };
